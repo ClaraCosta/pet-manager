@@ -1,0 +1,68 @@
+html,
+body {
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+}
+
+.container {
+  height: 100%;
+  margin: 0 auto;
+  padding: 0px;
+  position: relative;
+  top: 50px;
+}
+
+.progress-spinner {
+
+  margin: 0 auto;
+  // padding: 20px;
+  position: relative;
+  top: 100px;
+}
+
+.login-card {
+  max-width: 480px;
+  min-height: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  position: relative;
+  top: 100px;
+  border: 1px solid #ddd;
+}
+
+.mat-card-header {
+  display: flex;
+  align-items: center; /* Alinha verticalmente a logo e o texto */
+  justify-content: center; /* Centraliza o conjunto no centro do card */
+  gap: 0px; /* Espaçamento entre a logo e o texto */
+}
+
+.example-header-image img {
+  width: 200px; 
+  height: auto;
+}
+
+
+// .example-header-image {
+//   // background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+//   background-image: url('/assets/icons/icon-72x72.png');
+//   background-size: cover;
+// }
+
+.field-item {
+  padding: 10px;
+  margin: 10px;
+}
+
+.action-item {
+  margin-right:10px;
+  float:right;
+}
+
+.action-item button{
+  background-color: #492767;
+  color: #FFF;
+}
+
+
