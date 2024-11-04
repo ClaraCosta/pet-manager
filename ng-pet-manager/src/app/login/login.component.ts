@@ -12,6 +12,8 @@ export class LoginComponent implements OnInit {
   @Output() isAuth = new EventEmitter<boolean>();
   model: any = {};
   isValidating = false;
+  returnUrl: string;
+  errorMessage: string = '';  // Adicione uma variável para armazenar a mensagem de erro
 
   constructor(
     private route: ActivatedRoute,
@@ -20,31 +22,31 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.model.username = "Admin@test.com";
-    this.model.password = "password";
+    this.returnUrl = this.route.snapshot.queryParams["returnUrl"] || "/dashboard";
   }
 
-  login() {
-    this.isValidating = true;
-    this.authenticationService.login(this.model.username, this.model.password).subscribe(
-      response => {
-        if (response.code === 200) { // Verifica se o login foi bem-sucedido
-          console.log('Login realizado com sucesso:', response);
-          // Salva os dados de autenticação e sessão
-          this.authenticationService.saveUser(this.model, response.message);
-          
-          // Emite um evento de autenticação e redireciona para o dashboard
-          this.isAuth.emit(true);
-          this.router.navigate(['/dashboard']); // Redireciona para o dashboard
-        }
-      },
-      error => {
-        console.error('Erro de login:', error);
-        this.isValidating = false;
-      },
-      () => {
-        this.isValidating = false;
+  // src/app/login/login.component.ts
+login() {
+  console.log("Login button pressed"); // Depuração
+  this.isValidating = true;
+  this.errorMessage = '';
+
+  this.authenticationService.login(this.model.username, this.model.password).subscribe(
+    success => {
+      this.isValidating = false;
+      if (success) {
+        this.isAuth.emit(true);
+        this.router.navigate([this.returnUrl]);
+      } else {
+        this.errorMessage = 'Invalid username or password';
       }
-    );
-  }
+    },
+    error => {
+      this.isValidating = false;
+      this.errorMessage = 'Login failed. Please try again later.';
+      console.error('Erro de login:', error);
+    }
+  );
+}
+
 }

@@ -1,7 +1,11 @@
-.git
-.github
-.vscode
-coverage
+# Git Files #
+.git/
+.github/
+
+# IDE and Editor Files #
+.vscode/
+.idea/
+*.swp
 
 # OS generated files #
 .DS_Store
@@ -10,29 +14,55 @@ Icon?
 Thumbs.db
 
 # Node Files #
-node_modules
+node_modules/
 npm-debug.log
 npm-debug.log.*
 
 # Typing #
-src/typings/tsd
-typings
-tsd_typings
+src/typings/tsd/
+typings/
+tsd_typings/
 
-# Dist #
-dist
-.awcache
+# Angular and Build Files #
+dist/
+.awcache/
 .webpack.json
-compiled
-dll
-
-# IDE #
-.idea
-*.swp
-
-
-# Angular #
+compiled/
+dll/
 *.ngfactory.ts
 *.css.shim.ts
 *.ngsummary.json
 *.shim.ngstyle.ts
+
+# Angular Coverage and Cache #
+coverage/
+.ngfactory/
+.angular/cache/
+.angular/
+
+# Django Specific #
+myenv/                 # Ambiente virtual
+*.env                  # Arquivo de configuração de ambiente
+*.venv                 # Outro formato de ambiente virtual
+__pycache__/           # Cache do Python
+*.py[cod]              # Bytecode e arquivos de cache
+*/migrations/*.pyc     # Cache de migrações
+*/migrations/__pycache__/
+*/migrations/*         # Arquivos de migração (manter se necessário)
+
+# Django Static and Media Files #
+staticfiles/           # Arquivos estáticos gerados
+media/                 # Arquivos de mídia carregados (se não versionados)
+
+# Database and Logs #
+*.sqlite3              # Banco de dados SQLite
+*.log                  # Arquivos de log
+*.bak                  # Arquivos de backup
+
+# Temporary Files #
+*.tmp
+*.temp
+*.swo
+
+# Miscellaneous #
+compiled/

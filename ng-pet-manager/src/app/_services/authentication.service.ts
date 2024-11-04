@@ -1,39 +1,45 @@
 // src/app/_services/authentication.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
-  private apiUrl = 'https://petstore.swagger.io/v2'; // URL base da API
-  private apiKey = 'special-key';
+  private apiUrl = 'https://petstore.swagger.io/v2/user/login';
 
   constructor(private http: HttpClient) {}
 
-  login(username: string, password: string): Observable<any> {
-    const headers = new HttpHeaders({ 'api_key': this.apiKey });
-    return this.http.get(`${this.apiUrl}/user/login?username=${username}&password=${password}`, { headers });
-  }
+  login(username: string, password: string): Observable<boolean> {
+    console.log('AuthenticationService login() chamado'); // Adicione esse log
 
-  saveUser(user: any, sessionMessage: string): void {
-    // Salva os dados do usuário e sessão no localStorage
-    localStorage.setItem('user', JSON.stringify(user));
-    localStorage.setItem('session', sessionMessage); // Salva a sessão
-  }
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
 
-  getUser(): any {
-    const user = localStorage.getItem('user');
-    return user ? JSON.parse(user) : null;
+    return this.http.get(`${this.apiUrl}?username=${username}&password=${password}`, { headers }).pipe(
+      map((response: any) => {
+        console.log('Resposta da API:', response); // Log da resposta
+        if (response.code === 200) {
+          localStorage.setItem('currentUser', JSON.stringify({ username, session: response.message }));
+          return true;
+        }
+        return false;
+      }),
+      catchError((error) => {
+        console.error('Erro na chamada de login:', error); // Log de erro
+        return of(false);
+      })
+    );
   }
 
   logout(): void {
-    localStorage.removeItem('user');
-    localStorage.removeItem('session');
+    localStorage.removeItem('currentUser');
   }
 
   isAuthenticated(): boolean {
-    return !!localStorage.getItem('session'); // Verifica se a sessão existe
+    return localStorage.getItem('currentUser') !== null;
   }
 }

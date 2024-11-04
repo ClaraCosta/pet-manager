@@ -18,6 +18,7 @@ import { NotFoundPageComponent } from './notfoundpage';
 import { ConfirmDialog } from './shared/dialog.component';
 import { LoadingComponent } from  './loading';
 import { AuthGuard } from './_guard';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { AuthGuard } from './_guard';
     SharedModule,
     MaterialModule,
     HttpClientModule,
+    FormsModule,
     // ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     ChartsModule,
     AppRoutingModule
