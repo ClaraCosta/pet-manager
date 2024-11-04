@@ -40,7 +40,10 @@
     </ng-container>
     <ng-container matColumnDef="firstname">
       <mat-header-cell *matHeaderCellDef mat-sort-header> First Name </mat-header-cell>
-      <mat-cell *matCellDef="let customer"> {{customer.firstname}} </mat-cell>
+      <mat-cell *matCellDef="let customer">
+        {{ customer?.firstname || '' }} {{ customer?.lastname || '' }}
+      </mat-cell>
+      
     </ng-container>
     <ng-container matColumnDef="lastname">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Last Name </mat-header-cell>

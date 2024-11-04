@@ -1,12 +1,11 @@
-/* Defines the customer entity */
 export interface Customer {
-  id: number;
-  avatar: string;
-  firstname: string;
-  lastname: string;
-  rewards: number;
+  id?: number;  
+  username: string;
+  firstName: string;
+  lastName: string;
   email: string;
-  membership: boolean;
-  mobile: string;
-  phone: string;
+  password?: string;  
+  phone?: string;
+  userStatus?: number;  
 }
+
