@@ -33,16 +33,20 @@ body {
 
 .mat-card-header {
   display: flex;
-  align-items: center; /* Alinha verticalmente a logo e o texto */
-  justify-content: center; /* Centraliza o conjunto no centro do card */
-  gap: 0px; /* Espaçamento entre a logo e o texto */
+  align-items: center; /* Alinha verticalmente no centro */
+  justify-content: center; /* Centraliza no contêiner */
+  gap: 0px; /* Define o espaço entre as imagens */
 }
 
-.example-header-image img {
-  width: 200px; 
+.example-header-image-1 img {
+  width: 100px; 
   height: auto;
 }
 
+.example-header-image-2 img {
+  width: 300px; 
+  height: auto;
+}
 
 // .example-header-image {
 //   // background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
@@ -61,7 +65,7 @@ body {
 }
 
 .action-item button{
-  background-color: #492767;
+  background-color: #F74F4F;
   color: #FFF;
 }
 

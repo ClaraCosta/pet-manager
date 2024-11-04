@@ -35,10 +35,10 @@ const newLocal: string = `
   template: `
     <div class="about-card">
       <p class="subheader">
-        NG CRM 2.0
+        Pet Manager
       </p>
       <p class="content">
-        This demo app is not a real application. There is no back-end service behind the scene. Any data update (create or update record) will not be stored after hard refresh or logout. The main purpose of this demo is just a proof of concept.
+        Esse é um sistema destinado a gerenciar o dia-a-dia do seu PetShop.
       </p>
     </div>
 

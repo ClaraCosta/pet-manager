@@ -71,6 +71,7 @@
           },
           "configurations": {
             "production": {
+              "proxyConfig": "proxy.conf.json",
               "browserTarget": "ngmd9:build:production"
             }
           }

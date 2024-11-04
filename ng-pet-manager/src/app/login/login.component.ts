@@ -1,11 +1,7 @@
-import {
-  Component,
-  EventEmitter,
-  OnInit,
-  Output} from "@angular/core";
-import { Router, ActivatedRoute } from "@angular/router";
-
-import { AuthenticationService } from "../_services";
+// src/app/login/login.component.ts
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { AuthenticationService } from "../_services/authentication.service";
 
 @Component({
   selector: "login-form",
@@ -16,45 +12,38 @@ export class LoginComponent implements OnInit {
   @Output() isAuth = new EventEmitter<boolean>();
   model: any = {};
   isValidating = false;
-  returnUrl: string;
-  // isloading = true;
-  // isAuthenticated = false;
-
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private authenticationService: AuthenticationService
-  ) { }
+  ) {}
 
   ngOnInit() {
-    // this.authenticationService.logout();
     this.model.username = "Admin@test.com";
     this.model.password = "password";
-    this.returnUrl =
-      this.route.snapshot.queryParams["returnUrl"] || "loading";
-      // this.isloading = false;
-      // this.isAuthenticated =  false;
-
   }
 
   login() {
     this.isValidating = true;
-    // this.isloading = true;
-    this.authenticationService.login(this.model).subscribe(
-      () => {
-        // this.isAuthenticated =  true;
-        console.log(" next action here ... " );
+    this.authenticationService.login(this.model.username, this.model.password).subscribe(
+      response => {
+        if (response.code === 200) { // Verifica se o login foi bem-sucedido
+          console.log('Login realizado com sucesso:', response);
+          // Salva os dados de autenticação e sessão
+          this.authenticationService.saveUser(this.model, response.message);
+          
+          // Emite um evento de autenticação e redireciona para o dashboard
+          this.isAuth.emit(true);
+          this.router.navigate(['/dashboard']); // Redireciona para o dashboard
+        }
       },
       error => {
-        console.log(error);
+        console.error('Erro de login:', error);
         this.isValidating = false;
       },
-      ()=>{
+      () => {
         this.isValidating = false;
-        console.log("login " + this.returnUrl);
-        this.isAuth.emit(true);
-        this.router.navigate([this.returnUrl]);
       }
     );
   }
