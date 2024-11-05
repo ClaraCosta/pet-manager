@@ -1,4 +1,3 @@
-// src/app/login/login.component.ts
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthenticationService } from "../_services/authentication.service";
@@ -13,7 +12,7 @@ export class LoginComponent implements OnInit {
   model: any = {};
   isValidating = false;
   returnUrl: string;
-  errorMessage: string = '';  // Adicione uma variável para armazenar a mensagem de erro
+  errorMessage: string = '';  
 
   constructor(
     private route: ActivatedRoute,
@@ -23,30 +22,23 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.returnUrl = this.route.snapshot.queryParams["returnUrl"] || "/dashboard";
+    this.authenticationService.logout(); 
   }
 
-  // src/app/login/login.component.ts
-login() {
-  console.log("Login button pressed"); // Depuração
-  this.isValidating = true;
-  this.errorMessage = '';
-
-  this.authenticationService.login(this.model.username, this.model.password).subscribe(
-    success => {
-      this.isValidating = false;
-      if (success) {
-        this.isAuth.emit(true);
-        this.router.navigate([this.returnUrl]);
-      } else {
-        this.errorMessage = 'Invalid username or password';
+  login() {
+    this.isValidating = true; 
+    this.authenticationService.login(this.model.username, this.model.password).subscribe(
+      data => {
+        localStorage.setItem('token', data.token); 
+        this.isAuth.emit(true); 
+        this.isValidating = false;
+        this.router.navigate([this.returnUrl]); 
+      },
+      error => {
+        this.isValidating = false;
+        this.errorMessage = 'Invalid username or password'; // Exibir mensagem de erro
+        console.error('Erro no login:', error);
       }
-    },
-    error => {
-      this.isValidating = false;
-      this.errorMessage = 'Login failed. Please try again later.';
-      console.error('Erro de login:', error);
-    }
-  );
-}
-
+    );
+  }
 }

@@ -27,6 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+APPEND_SLASH = False
+
 
 # Application definition
 
@@ -40,7 +42,11 @@ INSTALLED_APPS = [
     'rest_framework',
     'users',
     'rest_framework.authtoken',
+    'corsheaders',
 ]
+
+ROOT_URLCONF = 'pet_api.urls'
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -50,6 +56,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 REST_FRAMEWORK = {
@@ -62,7 +70,10 @@ REST_FRAMEWORK = {
     ],
 }
 
-ROOT_URLCONF = 'pet_api.urls'
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:4200",  
+]
 
 TEMPLATES = [
     {

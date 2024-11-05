@@ -1,6 +1,6 @@
 {
     "/api": {
-      "target": "https://petstore.swagger.io/v2",
+      "target": "http://localhost:8000/api/user/",
       "secure": false,
       "changeOrigin": true,
       "pathRewrite": {

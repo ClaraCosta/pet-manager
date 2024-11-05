@@ -1,44 +1,69 @@
-﻿<!-- src/app/login/login.component.html -->
-<div id="container" class="container">
+﻿<div id="container" class="container">
   <mat-card class="login-card">
-    <!-- Use apenas ngSubmit para envio do formulário -->
     <form (ngSubmit)="login()" #f="ngForm" novalidate>
       <mat-card-header>
         <div class="example-header-image-1">
-          <img src="./assets/img/dog.svg">
+          <img src="./assets/img/dog.svg" alt="Dog Icon" />
         </div>
         <div class="example-header-image-2">
-          <img src="./assets/img/logo_pet_manager.svg" alt="Logo Pet Manager">
+          <img src="./assets/img/logo_pet_manager.svg" alt="Logo Pet Manager" />
         </div>
       </mat-card-header>
-      
-      <mat-card-content class="field-item">
-        <mat-form-field>
-          <input matInput type="text" placeholder="User Name" name="username" required />
+
+      <mat-card-content>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Username</mat-label>
+          <input
+            matInput
+            type="text"
+            placeholder="User Name"
+            name="username"
+            required
+            [(ngModel)]="model.username"
+            #username="ngModel"
+          />
+          <mat-error *ngIf="username.invalid && (username.dirty || username.touched)">
+            Username is required
+          </mat-error>
         </mat-form-field>
       </mat-card-content>
 
-      <mat-card-content class="field-item">
-        <mat-form-field>
-          <input matInput type="password" placeholder="Password" name="password" required />
+      <mat-card-content>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Password</mat-label>
+          <input
+            matInput
+            type="password"
+            placeholder="Password"
+            name="password"
+            required
+            [(ngModel)]="model.password"
+            #password="ngModel"
+          />
+          <mat-error *ngIf="password.invalid && (password.dirty || password.touched)">
+            Password is required
+          </mat-error>
         </mat-form-field>
       </mat-card-content>
 
-      <!-- Mensagem de erro -->
       <mat-card-content *ngIf="errorMessage" class="error-message">
         <p>{{ errorMessage }}</p>
       </mat-card-content>
-    
-      <mat-card-actions class="action-item">
-        <button mat-raised-button type="submit" [disabled]="isValidating" *ngIf="!isValidating">
-          Login
-        </button>
 
-        <button mat-raised-button type="submit" disabled *ngIf="isValidating">
-          <mat-spinner diameter="20"></mat-spinner> Logando...
+      <mat-card-actions>
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          [disabled]="isValidating || f.invalid"
+          class="login-button"
+        >
+          <ng-container *ngIf="!isValidating">Login</ng-container>
+          <ng-container *ngIf="isValidating">
+            <mat-spinner diameter="20"></mat-spinner> Logando...
+          </ng-container>
         </button>
       </mat-card-actions>
-      
     </form>
   </mat-card>
 </div>

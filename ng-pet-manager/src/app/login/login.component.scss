@@ -1,72 +1,53 @@
 html,
 body {
   height: 100%;
-  margin: 0px;
-  padding: 0px;
+  margin: 0;
+  padding: 0;
 }
 
 .container {
-  height: 100%;
-  margin: 0 auto;
-  padding: 0px;
-  position: relative;
-  top: 50px;
-}
-
-.progress-spinner {
-
-  margin: 0 auto;
-  // padding: 20px;
-  position: relative;
-  top: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Centraliza verticalmente */
 }
 
 .login-card {
   max-width: 480px;
-  min-height: 400px;
-  margin: 0 auto;
+  width: 100%;
   padding: 20px;
-  position: relative;
-  top: 100px;
   border: 1px solid #ddd;
 }
 
 .mat-card-header {
   display: flex;
-  align-items: center; /* Alinha verticalmente no centro */
-  justify-content: center; /* Centraliza no contêiner */
-  gap: 0px; /* Define o espaço entre as imagens */
+  align-items: center;
+  justify-content: center;
+  gap: 0;
 }
 
 .example-header-image-1 img {
-  width: 100px; 
+  width: 100px;
   height: auto;
 }
 
 .example-header-image-2 img {
-  width: 300px; 
+  width: 300px;
   height: auto;
 }
 
-// .example-header-image {
-//   // background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
-//   background-image: url('/assets/icons/icon-72x72.png');
-//   background-size: cover;
-// }
-
-.field-item {
-  padding: 10px;
-  margin: 10px;
+.full-width {
+  width: 100%;
 }
 
-.action-item {
-  margin-right:10px;
-  float:right;
+.error-message {
+  color: red;
+  text-align: center;
+  margin-top: 10px;
 }
 
-.action-item button{
-  background-color: #F74F4F;
-  color: #FFF;
+.login-button {
+  background-color: #f74f4f;
+  color: #fff;
+  width: 100%;
 }
-
-

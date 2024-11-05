@@ -19,6 +19,8 @@ import { ConfirmDialog } from './shared/dialog.component';
 import { LoadingComponent } from  './loading';
 import { AuthGuard } from './_guard';
 import { FormsModule } from '@angular/forms';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './_helpers/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -45,6 +47,7 @@ import { FormsModule } from '@angular/forms';
     AuthGuard,
     BackendService,
     AuthenticationService,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]
 })
