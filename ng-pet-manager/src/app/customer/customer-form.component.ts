@@ -1,4 +1,3 @@
-// src/app/customer/customer-form.component.ts
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -14,9 +13,6 @@ export class CustomerFormComponent implements OnInit {
   customerForm: FormGroup;
   customer: Customer;
   isEditMode: boolean = false;
-
-  // Adicione a propriedade fieldColspan
-  fieldColspan: number = 3;  // Defina o valor conforme o layout desejado
 
   constructor(
     private fb: FormBuilder,
@@ -51,13 +47,13 @@ export class CustomerFormComponent implements OnInit {
 
   saveCustomer(): void {
     if (this.customerForm.valid) {
-      const updatedCustomer = { ...this.customer, ...this.customerForm.value };
+      const newCustomer = { ...this.customer, ...this.customerForm.value };
       if (this.isEditMode) {
-        this.customerService.updateCustomer(this.customer.username, updatedCustomer)
+        this.customerService.updateCustomer(this.customer.username, newCustomer)
           .subscribe(() => this.router.navigate(['/customers']));
       } else {
-        this.customerService.createCustomer(updatedCustomer)
-          .subscribe(() => this.router.navigate(['/customers']));
+        this.customerService.createCustomer(newCustomer)  // Chama o método de criação
+          .subscribe(() => this.router.navigate(['/customers'])); // Redireciona após criação
       }
     }
   }

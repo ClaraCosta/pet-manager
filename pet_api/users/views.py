@@ -11,7 +11,7 @@ from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import User
 
 @api_view(['POST'])
-@permission_classes([AllowAny])  # Permitir acesso público para login
+@permission_classes([AllowAny])  
 def login_user(request):
     username = request.data.get('username')
     password = request.data.get('password')
@@ -25,28 +25,28 @@ def login_user(request):
 
 @api_view(['POST'])
 @authentication_classes([TokenAuthentication])
-@permission_classes([IsAuthenticated])  # Requer autenticação para logout
+@permission_classes([IsAuthenticated])  
 def logout_user(request):
     request.user.auth_token.delete()
     logout(request)
     return Response(status=status.HTTP_200_OK)
 
 @api_view(['GET'])
-@permission_classes([IsAuthenticated])  # Requer autenticação para obter usuário
+@permission_classes([IsAuthenticated])  
 def get_user(request, username):
     user = get_object_or_404(User, username=username)
     serializer = UserSerializer(user)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 @api_view(['GET'])
-@permission_classes([IsAuthenticated])  # Somente usuários autenticados podem acessar
+@permission_classes([IsAuthenticated])  
 def list_users(request):
-    users = User.objects.all()  # Busca todos os usuários
+    users = User.objects.all()  
     serializer = UserSerializer(users, many=True)
     return Response(serializer.data)
 
 @api_view(['POST'])
-@permission_classes([AllowAny])  # Permitir acesso público para criação de usuário
+@permission_classes([AllowAny])  
 def create_user(request):
     serializer = UserSerializer(data=request.data)
     if serializer.is_valid():

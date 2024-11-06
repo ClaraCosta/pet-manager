@@ -8,13 +8,13 @@
   </mat-card-header>
   <mat-toolbar class="primary">
     <mat-toolbar-row>
-      <button mat-mini-fab style="margin-right:10px; background-color:#e07c9e" [routerLink]="['/customers/edit/', 0]">
+      <button mat-mini-fab style="margin-right:10px; background-color:#7e2727" [routerLink]="['/customers/edit/', 0]">
         <mat-icon>add</mat-icon>
       </button>
-      <button mat-mini-fab style="margin-right:10px; background-color:#a28b6e" (click)="sidenav.toggle()">
+      <button mat-mini-fab style="margin-right:10px; background-color:#007fb9" (click)="sidenav.toggle()">
         <mat-icon>search</mat-icon>
       </button>
-      <button mat-mini-fab style="margin-right:10px; background-color:darkgray" (click)="reset()">
+      <button mat-mini-fab style="margin-right:10px; background-color:rgb(235, 235, 235)" (click)="reset()">
         <mat-icon>refresh</mat-icon>
       </button>
 
@@ -40,10 +40,7 @@
     </ng-container>
     <ng-container matColumnDef="firstname">
       <mat-header-cell *matHeaderCellDef mat-sort-header> First Name </mat-header-cell>
-      <mat-cell *matCellDef="let customer">
-        {{ customer?.firstname || '' }} {{ customer?.lastname || '' }}
-      </mat-cell>
-      
+      <mat-cell *matCellDef="let customer"> {{customer.firstname}} </mat-cell>
     </ng-container>
     <ng-container matColumnDef="lastname">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Last Name </mat-header-cell>
@@ -73,11 +70,11 @@
         <!-- <button mat-button style="color:white; background-color:darkgrey" (click)="resetListFilter()">Reset</button> -->
       </mat-header-cell>
       <mat-cell *matCellDef="let customer" style="justify-content:right;">
-        <button mat-mini-fab style="background-color:teal; min-height: 30px;   margin: 5px;"
+        <button mat-mini-fab style="background-color:rgb(128, 36, 0); min-height: 30px;   margin: 5px;"
           [routerLink]="['/customers/edit/', customer.id]">
           <mat-icon>edit</mat-icon>
         </button>
-        <button mat-mini-fab style="background-color:lightblue; min-height: 30px;  margin: 5px;"
+        <button mat-mini-fab style="background-color:rgb(24, 5, 0); min-height: 30px;  margin: 5px;"
           (click)="openDialog(customer.id)">
           <mat-icon>delete</mat-icon>
         </button>
